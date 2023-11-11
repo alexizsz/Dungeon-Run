@@ -10,28 +10,27 @@ public class Player implements ICombat {
     int exp;
     int level;
     int health;
-    int damage;
+    int baseDamage;
 
 
 
     public int getDamage() {
-        return damage;
+        return baseDamage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setDamage(int baseDamage) {
+        this.baseDamage = baseDamage;
     }
 
 
-    public Player(String name, int strength, int agility, int intellect, int exp, int level, int health, int damage) {
-        this.name = name;
+    public Player(int strength, int agility, int intellect, int exp, int level, int health, int baseDamage) {
         this.strength = strength;
         this.agility = agility;
         this.intellect = intellect;
         this.exp = exp;
         this.level = level;
         this.health = health;
-        this.damage = damage;
+        this.baseDamage = baseDamage;
     }
 
     public String getName() {
@@ -108,7 +107,20 @@ public class Player implements ICombat {
         System.out.println("Ha ha!");
     }
 
+    @Override
     public void dyingSound(){
         System.out.println("Aooooouuwww...... ;)");
     }
+
+    public void getStatus() {
+        System.out.printf("Name: %s %n", name);
+        System.out.printf("Strength: %d %n", strength);
+        System.out.printf("Intelligence: %d %n", intellect);
+        System.out.printf("Agility: %d %n", agility);
+        System.out.printf("Health: %d %n", health);
+        System.out.printf("Experience: %d %n", exp);
+        System.out.printf("Level: %d %n", level);
+        System.out.printf("BaseDamage: %d %n", baseDamage);
+    }
+
 }

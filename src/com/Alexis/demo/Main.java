@@ -1,11 +1,18 @@
 package com.Alexis.demo;
 
-public class Main {
-    public static void main(String[] args) {
-        Scann sc = new Scann();
+import static com.Alexis.demo.Scann.*;
 
+import static com.Alexis.demo.Colors.*;
+
+public class Main {
+
+    static Scann sc = new Scann();
+
+    public static void main(String[] args) {
+
+        Player player = new Player(2,2,2,2,1,2,2);
         System.out.println("Choose your character name:");
-        Player player = new Player(sc.nextLine());
+        player.setName(sc.nextLine());
         System.out.println("Welcome " + player);
         System.out.println("""
                 Welcome to the menu:
@@ -20,11 +27,8 @@ public class Main {
                     int menuChoice = Integer.parseInt(sc.nextLine());
                     switch (menuChoice){
                         case 1:
-                            Monster monsterOne = new Monster(1,1,1,1,1,1);
-                            System.out.println("Fighting menu");
-                            player.combatSound();
-                            player.damageGiven();
-                            monsterOne.damageTaken();
+                            fightingMenu(player);
+
                             break;
                         case 2:
                             System.out.println("Status menu");
@@ -46,4 +50,25 @@ public class Main {
             } while (startStop);
         }while (startStop);
     }
+
+    public static void fightingMenu(Player player){
+        System.out.println("Fighting Menu:" +
+                "1 - FIGHT" +
+                "2 - FLEE!" +
+                "3 - STATUS" +
+                "");
+        switch (sc.nextInt()){
+            case 1:
+                System.out.println(RED + "You hear something closing in..." + RESET);
+                break;
+            case 2:
+                System.out.println("You slowly turn around and... start fleeing!");
+                break;
+            case 3:
+                player.getStatus();
+
+
+        }
+    }
+
 }
