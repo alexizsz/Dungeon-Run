@@ -2,7 +2,7 @@ package com.Alexis.demo;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+import static com.Alexis.demo.Colors.*;
 public class Monster implements ICombat{
 
 
@@ -12,19 +12,21 @@ public class Monster implements ICombat{
 
 
     int strength;
-    int agility;
-    int intellect;
     int level;
     int health;
-    int damage;
+    int baseDamage;
 
-    public Monster(int strength, int agility, int intellect, int level, int health, int damage) {
+    public void levelUp(){
+        this.setLevel(this.getLevel() + 1);
+        this.setLevel(this.getStrength() + 1);
+        this.setHealth(this.getHealth() + 3);
+        this.setDamage(this.getDamage() + 1);
+    }
+    public Monster(int strength, int level, int health, int baseDamage) {
         this.strength = strength;
-        this.agility = agility;
-        this.intellect = intellect;
         this.level = level;
         this.health = health;
-        this.damage = damage;
+        this.baseDamage = baseDamage;
     }
 
     public int getStrength() {
@@ -33,22 +35,6 @@ public class Monster implements ICombat{
 
     public void setStrength(int strength) {
         this.strength = strength;
-    }
-
-    public int getAgility() {
-        return agility;
-    }
-
-    public void setAgility(int agility) {
-        this.agility = agility;
-    }
-
-    public int getIntellect() {
-        return intellect;
-    }
-
-    public void setIntellect(int intellect) {
-        this.intellect = intellect;
     }
 
     public int getLevel() {
@@ -68,30 +54,31 @@ public class Monster implements ICombat{
     }
 
     public int getDamage() {
-        return damage;
+        return baseDamage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void setDamage(int baseDamage) {
+        this.baseDamage = baseDamage;
     }
 
+    public void takeDamage(int baseDamage) {
+        setHealth( getHealth() - baseDamage );
+    }
     @Override
     public void combatSound() {
-        System.out.println("Slap!");
+        System.out.println(RED + "The monster attacks: Slap!" + RESET);
     }
 
     @Override
     public void damageTaken() {
-        System.out.println("HNYAAAA!!");
+        System.out.println(RED + "Monster takes a hit! : HNYAAAA!!" + RESET);
     }
 
     @Override
     public void damageGiven() {
-        System.out.println("hyaaaa!");
+        System.out.println(RED  + "hyaaaa!" + RESET);
     }
 
     @Override
-    public void dyingSound() {
-        System.out.println("aaaaaaaaaaaah!!");
-    }
+    public void dyingSound() {System.out.println(RED + "aaaaaaaaaaaah!!" + RESET);}
 }
