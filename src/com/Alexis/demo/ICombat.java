@@ -5,7 +5,9 @@ import java.util.Random;
 public interface ICombat {
 
 
-    void combatSound();
+    default void combatSound() throws InterruptedException{
+        Thread.sleep(999);
+    }
     void damageGiven();
     void damageTaken();
     void dyingSound();

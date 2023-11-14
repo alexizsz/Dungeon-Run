@@ -13,14 +13,30 @@ public class Player implements ICombat {
     int baseDamage;
 
 
+    public void updateXP(int newXP){
+        exp += newXP;
+        while(exp >= 100){
+            levelUp();
+            System.out.println("You have gained a level!");
+            exp -= 100;
+        }
+    }
+
+    public void levelUp() {
+        this.setLevel(this.getLevel() + 1);
+        this.setStrength(this.getStrength() + 1);
+        this.setHealth(this.getHealth() + 3);
+        this.setAgility(this.getAgility() + 1);
+        this.setIntellect(this.getIntellect());
+    }
 
     public int getDamage() {
-        return baseDamage;
+        return baseDamage + strength;
     }
 
-    public void setDamage(int baseDamage) {
+    /*public void setDamage(int baseDamage) {
         this.baseDamage = baseDamage;
-    }
+    }*/
 
 
     public Player(int strength, int agility, int intellect, int exp, int level, int health, int baseDamage) {
@@ -93,7 +109,7 @@ public class Player implements ICombat {
         this.name = name;
     }
     @Override
-    public void combatSound(){
+    public void combatSound() {
         System.out.println(GREEN + getName() + " attacks : Schwing!" + RESET);
     }
     @Override
@@ -109,7 +125,7 @@ public class Player implements ICombat {
         System.out.println(GREEN + getName() + ": Aooooouuwww...... ;)" + RESET);
     }
     public void getStatus() {
-        System.out.printf(BLACK_BACKGROUND_BRIGHT + "Name: %s %n", name);
+        System.out.printf(BLACK_BACKGROUND_BRIGHT + BLACK_BOLD + "Name: %s %n", name);
         System.out.printf("Strength: %d %n", strength);
         System.out.printf("Intelligence: %d %n", intellect);
         System.out.printf("Agility: %d %n", agility);
@@ -122,5 +138,6 @@ public class Player implements ICombat {
     public void takeDamage(int damage) {
         setHealth( getHealth() - damage );
     }
+
 
 }

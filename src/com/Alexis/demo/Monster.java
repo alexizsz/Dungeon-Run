@@ -5,20 +5,17 @@ import java.util.Random;
 import static com.Alexis.demo.Colors.*;
 public class Monster implements ICombat{
 
-
-    ArrayList<String> monsters = new ArrayList<>(12);
-
-    
-
-
     int strength;
     int level;
     int health;
     int baseDamage;
 
+    int givesExp;
+
+
     public void levelUp(){
-        this.setLevel(this.getLevel() + 1);
-        this.setLevel(this.getStrength() + 1);
+        this.setLevel(level + 1);
+        this.setStrength(this.getStrength() + 1);
         this.setHealth(this.getHealth() + 3);
         this.setDamage(this.getDamage() + 1);
     }
@@ -27,6 +24,7 @@ public class Monster implements ICombat{
         this.level = level;
         this.health = health;
         this.baseDamage = baseDamage;
+        this.givesExp = new Random().nextInt(80,120);
     }
 
     public int getStrength() {
@@ -54,7 +52,7 @@ public class Monster implements ICombat{
     }
 
     public int getDamage() {
-        return baseDamage;
+        return baseDamage + strength;
     }
 
     public void setDamage(int baseDamage) {
