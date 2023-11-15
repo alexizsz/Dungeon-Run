@@ -1,4 +1,5 @@
 package com.Alexis.demo;
+
 import static com.Alexis.demo.Colors.*;
 public class Player implements ICombat {
 
@@ -13,6 +14,14 @@ public class Player implements ICombat {
     int baseDamage;
 
 
+    public int dodgeChance(){
+        int startingDodgeChance = 0;
+        int bonusDodgeChance = getAgility();
+        int cappedDodgeChance = Math.min(95, startingDodgeChance + bonusDodgeChance);
+
+        return cappedDodgeChance;
+    }
+
     public void updateXP(int newXP){
         exp += newXP;
         while(exp >= 100){
@@ -24,11 +33,12 @@ public class Player implements ICombat {
 
     public void levelUp() {
         this.setLevel(this.getLevel() + 1);
-        this.setStrength(this.getStrength() + 1);
+        this.setStrength(this.getStrength() + 2);
         this.setHealth(this.getHealth() + 3);
-        this.setAgility(this.getAgility() + 1);
-        this.setIntellect(this.getIntellect());
+        this.setAgility(this.getAgility() + 2);
+        this.setIntellect(this.getIntellect() + 2);
     }
+
 
     public int getDamage() {
         return baseDamage + strength;
@@ -81,7 +91,7 @@ public class Player implements ICombat {
         this.intellect = intellect;
     }
 
-    public int getExp(int exp) {
+    public int getExp() {
         return exp;
     }
 

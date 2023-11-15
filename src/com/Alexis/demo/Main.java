@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
 
         Monster monster = new Monster(1, 1, 10, 1);
-        Player player = new Player(2,2,2,0,1,100,2);
+        Player player = new Player(2,99,2,0,1,100,2);
         System.out.println("Choose your character name:");
         player.setName(sc.nextLine());
         System.out.println("Welcome " + player.getName());
@@ -47,9 +47,10 @@ public class Main {
         }
     }
     public static void battleMenu(Player player, Monster monster){
+        Random random = new Random();
 
         System.out.println(RED_BOLD + "Battle begins!" + RESET);
-        System.out.println("Your are facing a monster of a level of :" + monster.getLevel());
+        System.out.println("You face a monster of level :" + monster.getLevel());
         System.out.println(player.getName() + " starts attacking..");
 
         player.combatSound();
@@ -61,27 +62,30 @@ public class Main {
             System.out.println("Congratulations, you have dealt " + player.getDamage() +
                     " damage and defeated this monster and have gained " + monster.givesExp + " xp!");
             player.updateXP(monster.givesExp);
-
             monster.levelUp();
-
             mainMenu(player,monster);
         } else {
             System.out.println("The Monster took " + player.getDamage() + " damage and have " +
                     "" + monster.getHealth() + " health remaining");
 
             monster.combatSound();
-            player.takeDamage(monster.baseDamage);
-            if (player.getHealth() <= 0) {
-                System.out.println(player.getName() + "has taken too much damage!!! ");
-                player.dyingSound();
-                System.out.println(RED_BOLD + RED_UNDERLINED + "GAME OVER");
-                System.exit(0);
+            if (random.nextInt(101) < player.dodgeChance()){
+                System.out.println("You managed to dodge the slap!!");
+                fightingMenu(player,monster);
             }else {
-            System.out.println("You took " + monster.getDamage() + " damage and have " +
-                    "" + player.getHealth() + " health remaining");
-            player.damageTaken();
-            monster.damageGiven();
-            fightingMenu(player,monster);
+                player.takeDamage(monster.getDamage());
+                if (player.getHealth() <= 0) {
+                    System.out.println(player.getName() + "has taken too much damage!!! ");
+                    player.dyingSound();
+                    System.out.println(RED_BOLD + RED_UNDERLINED + "GAME OVER");
+                    System.exit(0);
+                }else {
+                    System.out.println("You took " + monster.getDamage() + " damage and have " +
+                            "" + player.getHealth() + " health remaining");
+                    player.damageTaken();
+                    monster.damageGiven();
+                    fightingMenu(player,monster);
+                }
             }
         }
     }

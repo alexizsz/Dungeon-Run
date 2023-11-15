@@ -1,6 +1,5 @@
 package com.Alexis.demo;
 
-import java.util.ArrayList;
 import java.util.Random;
 import static com.Alexis.demo.Colors.*;
 public class Monster implements ICombat{
@@ -9,9 +8,7 @@ public class Monster implements ICombat{
     int level;
     int health;
     int baseDamage;
-
     int givesExp;
-
 
     public void levelUp(){
         this.setLevel(level + 1);
